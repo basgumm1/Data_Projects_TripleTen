@@ -1,0 +1,23 @@
+Zuber Database - SQL Project
+
+[Description]
+You're working as an analyst for Zuber, a new ride-sharing company that's launching in Chicago. 
+Your task is to find patterns in the available information. You want to understand passenger preferences and the impact of external factors on rides.
+Working with a database, you'll analyze data from competitors and test a hypothesis about the impact of weather on ride frequency. 
+
+** Print the company_name field. 
+Find the number of taxi rides for each taxi company for November 15-16, 2017, name the resulting field trips_amount and print it, too. Sort the results by the trips_amount field in descending order. **
+
+select 
+    cabs.company_name,
+    count(trips.trip_id) as trips_amount
+from
+    cabs
+inner join trips on trips.cab_id = cabs.cab_id
+where
+    cast(trips.start_ts as date) between '2017-11-15' and '2017-11-16'
+group by
+    cabs.company_name 
+order by
+    trips_amount desc;
+
